@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgxIndexedDBService } from 'ngx-indexed-db';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Entry Point App';
+  constructor(private dbService: NgxIndexedDBService) {}
 }
