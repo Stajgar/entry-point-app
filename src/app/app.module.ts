@@ -9,6 +9,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -44,6 +46,8 @@ const dbConfig: DBConfig = {
     AppRoutingModule,
     ReactiveFormsModule,
     NgxIndexedDBModule.forRoot(dbConfig),
+    NgbModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 
 @Component({
@@ -8,10 +13,18 @@ import { NgxIndexedDBService } from 'ngx-indexed-db';
   styleUrls: ['./log-in.component.css'],
 })
 export class LogInComponent {
-  logInForm = this.formBuilder.group({
-    email: '',
-    password: '',
+  logInForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
   });
+
+  get getControl() {
+    return this.logInForm.controls;
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private dbService: NgxIndexedDBService
