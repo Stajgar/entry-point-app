@@ -1,10 +1,5 @@
-import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Router } from '@angular/router';
 
@@ -13,7 +8,15 @@ import { Router } from '@angular/router';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css'],
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
+  constructor(private dbService: NgxIndexedDBService, private router: Router) {}
+
+  ngOnInit(): void {
+    if (window.sessionStorage.getItem('userId')) {
+      this.router.navigate(['/welcome']);
+    }
+  }
+
   signUpForm = new FormGroup({
     firstName: new FormControl('', [
       Validators.required,
@@ -33,12 +36,6 @@ export class SignUpComponent {
   get getControl() {
     return this.signUpForm.controls;
   }
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private dbService: NgxIndexedDBService,
-    private router: Router
-  ) {}
 
   onSubmit(): void {
     this.dbService

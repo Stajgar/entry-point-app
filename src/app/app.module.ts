@@ -11,6 +11,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LogOutPageComponent } from './log-out-page/log-out-page.component';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -40,6 +41,7 @@ const dbConfig: DBConfig = {
     LogInComponent,
     WelcomePageComponent,
     NavBarComponent,
+    LogOutPageComponent,
   ],
   imports: [
     BrowserModule,
