@@ -51,11 +51,8 @@ export class SignUpComponent implements OnInit {
     return this.signUpForm.get('password');
   }
 
-  get signUpFormControl() {
-    return this.signUpForm.controls;
-  }
-
   @ViewChild('passwordField') passwordField: ElementRef;
+
   changePasswordVisibility() {
     if (this.passwordField.nativeElement.type === 'password') {
       this.passwordField.nativeElement.type = 'text';

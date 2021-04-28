@@ -32,10 +32,6 @@ export class LogInComponent implements OnInit {
     return this.logInForm.get('password');
   }
 
-  get logInFormControl() {
-    return this.logInForm.controls;
-  }
-
   onSubmit(): void {
     this.submitted = true;
     this.failedLogIn = false;
