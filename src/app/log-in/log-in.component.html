@@ -1,4 +1,7 @@
-<div class="container">
+<div class="container-fluid">
+  <h3 class="text-center">Log In</h3>
+  <h6 class="text-muted text-center">Log in to your account.</h6>
+
   <form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="email"> Email </label>
@@ -8,14 +11,15 @@
         formControlName="email"
         class="form-control"
       />
+
       <div
-        *ngIf="getControl.email.touched && getControl.email.invalid"
-        class="alert alert-danger"
+        class="text-danger"
+        *ngIf="(email.touched || submitted) && email.errors?.required"
       >
-        <div *ngIf="getControl.email.errors.required">Email is required.</div>
-        <div *ngIf="getControl.email.errors.email">
-          Please, enter valid email address.
-        </div>
+        Email is required.
+      </div>
+      <div class="text-secondary" *ngIf="email.touched && email.errors?.email">
+        Please, enter valid email address.
       </div>
     </div>
 
@@ -28,18 +32,25 @@
         class="form-control"
       />
       <div
-        *ngIf="getControl.password.touched && getControl.password.invalid"
-        class="alert alert-danger"
+        class="text-danger"
+        *ngIf="(password.touched || submitted) && password.errors?.required"
       >
-        <div *ngIf="getControl.password.errors.required">
-          Password is required.
-        </div>
-        <div *ngIf="getControl.firstName.errors.minlength">
-          Name should have at least 8 characters.
-        </div>
+        Password is required.
+      </div>
+      <div
+        class="text-danger"
+        *ngIf="password.touched && password.errors?.minlength"
+      >
+        Password should have at least 8 characters.
       </div>
     </div>
 
-    <button class="btn btn-primary" type="submit">Log in</button>
+    <button class="btn btn-danger btn-lg btn-block" type="submit">
+      Log in
+    </button>
   </form>
+  <h6 class="text-muted text-center mb-2">
+    Need an account?
+    <a class="text-dark" routerLink="/" routerLinkActive="active">Sign up</a>
+  </h6>
 </div>

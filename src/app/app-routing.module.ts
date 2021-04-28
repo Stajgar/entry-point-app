@@ -7,6 +7,7 @@ import { LogOutPageComponent } from './log-out-page/log-out-page.component';
 
 const routes: Routes = [
   { path: '', component: SignUpComponent },
+  { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LogInComponent },
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'logout', component: LogOutPageComponent },

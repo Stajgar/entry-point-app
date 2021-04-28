@@ -1,9 +1,12 @@
-
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: "Prompt", sans-serif;
 }
 
-h1 {
-  text-align: center;
+form {
+  max-width: 450px;
+  margin: 20px auto;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 30px;
 }
