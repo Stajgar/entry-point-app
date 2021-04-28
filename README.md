@@ -2,6 +2,8 @@
 
 Sample registration and login flow with welcome page. Build with Angular and Boostrap. Using IndexedDB to store user data. After login it stores user id in the session storage.
 
+App preview can be found under this address: https://eloquent-visvesvaraya-fd5d87.netlify.app/
+
 ## Running the application
 
 This instruction assume you have `node` of version 14+ already installed on your machine.
