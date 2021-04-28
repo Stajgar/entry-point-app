@@ -2,6 +2,12 @@
   <h3 class="text-center">Sign Up</h3>
   <h6 class="text-muted text-center">Create your account.</h6>
   <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <div class="alert alert-success" role="alert" *ngIf="successfulSignUp">
+      Thank you for signing up. You can now log in.
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="failedSignUp">
+      Account with this email already exists.
+    </div>
     <div class="form-group">
       <label for="first-name"> First name </label>
       <input

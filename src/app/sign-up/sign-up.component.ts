@@ -12,6 +12,8 @@ export class SignUpComponent implements OnInit {
   constructor(private dbService: NgxIndexedDBService, private router: Router) {}
 
   signUpForm: FormGroup;
+  failedSignUp: boolean;
+  successfulSignUp: boolean;
   submitted = false;
 
   ngOnInit(): void {
@@ -52,7 +54,7 @@ export class SignUpComponent implements OnInit {
   get signUpFormControl() {
     return this.signUpForm.controls;
   }
-  
+
   @ViewChild('passwordField') passwordField: ElementRef;
   changePasswordVisibility() {
     if (this.passwordField.nativeElement.type === 'password') {
@@ -64,19 +66,27 @@ export class SignUpComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
+    this.successfulSignUp = false;
+    this.failedSignUp = false;
 
     if (this.signUpForm.valid) {
       this.dbService
-        .add('users', {
-          firstName: this.signUpForm.value.firstName,
-          lastName: this.signUpForm.value.lastName,
-          email: this.signUpForm.value.email.toLowerCase(),
-          password: this.signUpForm.value.password,
-        })
-        .subscribe(() => {
-          // Handle not unique email
-          alert(`Thank you for signing up. You can now log in.`);
-          this.router.navigate(['/login']);
+        .getByIndex('users', 'email', this.signUpForm.value.email.toLowerCase())
+        .subscribe((user) => {
+          if (typeof user === 'undefined') {
+            this.dbService
+              .add('users', {
+                firstName: this.signUpForm.value.firstName,
+                lastName: this.signUpForm.value.lastName,
+                email: this.signUpForm.value.email.toLowerCase(),
+                password: this.signUpForm.value.password,
+              })
+              .subscribe(() => {
+                this.successfulSignUp = true;
+              });
+          } else {
+            this.failedSignUp = true;
+          }
         });
     }
   }
