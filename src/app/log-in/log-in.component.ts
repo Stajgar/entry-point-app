@@ -12,6 +12,7 @@ export class LogInComponent implements OnInit {
   constructor(private dbService: NgxIndexedDBService, private router: Router) {}
 
   logInForm: FormGroup;
+  failedLogIn: boolean;
   submitted = false;
 
   ngOnInit(): void {
@@ -20,10 +21,7 @@ export class LogInComponent implements OnInit {
     }
     this.logInForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-      ]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 
@@ -40,6 +38,7 @@ export class LogInComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
+    this.failedLogIn = false;
 
     if (this.logInForm.valid) {
       this.dbService
@@ -55,7 +54,7 @@ export class LogInComponent implements OnInit {
               typeof user === 'undefined' ||
               this.logInForm.value.password !== user.password
             ) {
-              alert('Invalid login or password');
+              this.failedLogIn = true;
             } else {
               window.sessionStorage.setItem('userId', user.id.toString());
               window.sessionStorage.setItem('userFirstName', user.firstName);
