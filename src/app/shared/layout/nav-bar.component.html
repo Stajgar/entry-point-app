@@ -16,7 +16,8 @@
       id="navbarSupportedContent"
       [ngbCollapse]="isCollapsed"
     >
-      <ul class="navbar-nav mr-auto" *ngIf="verifyUserLogIn() == null">
+     
+      <ul class="navbar-nav mr-auto" *appShowAuthed="false">
         <li class="nav-item">
           <a class="nav-link" routerLink="/signup" routerLinkActive="active"
             >Sign Up</a
@@ -28,7 +29,8 @@
           >
         </li>
       </ul>
-      <ul class="navbar-nav mr-auto" *ngIf="verifyUserLogIn()">
+
+      <ul class="navbar-nav mr-auto" *appShowAuthed="true">
         <li class="nav-item active">
           <a class="nav-link" routerLink="/logout" routerLinkActive="active"
             >Log Out</a

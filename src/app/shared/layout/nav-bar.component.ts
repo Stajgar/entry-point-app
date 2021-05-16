@@ -7,8 +7,4 @@ import { Component } from '@angular/core';
 })
 export class NavBarComponent {
   isCollapsed = true;
-
-  verifyUserLogIn() {
-    return window.sessionStorage.getItem('userId');
-  }
 }
