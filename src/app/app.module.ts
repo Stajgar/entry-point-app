@@ -12,6 +12,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LogOutPageComponent } from './log-out-page/log-out-page.component';
+import { CoreModule } from './core/core.module';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -50,6 +51,7 @@ const dbConfig: DBConfig = {
     NgxIndexedDBModule.forRoot(dbConfig),
     NgbModule,
     FontAwesomeModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

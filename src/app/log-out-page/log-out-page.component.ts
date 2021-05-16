@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../core/services';
 
 @Component({
   selector: 'app-log-out-page',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./log-out-page.component.css'],
 })
 export class LogOutPageComponent implements OnInit {
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    sessionStorage.removeItem('userId');
-    sessionStorage.removeItem('userFirstName');
+    this.userService.purgeSession();
   }
 }
