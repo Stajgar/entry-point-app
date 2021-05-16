@@ -8,11 +8,11 @@ import { AppComponent } from './app.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LogOutPageComponent } from './log-out-page/log-out-page.component';
 import { CoreModule } from './core/core.module';
+import { NavBarComponent, SharedModule } from './shared';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
@@ -52,6 +52,7 @@ const dbConfig: DBConfig = {
     NgbModule,
     FontAwesomeModule,
     CoreModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
