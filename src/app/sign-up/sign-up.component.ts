@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Router } from '@angular/router';
+import { UserService } from '../core/services';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,7 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
-  constructor(private dbService: NgxIndexedDBService, private router: Router) {}
+  constructor(
+    private dbService: NgxIndexedDBService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   signUpForm: FormGroup;
   failedSignUp: boolean;
@@ -71,16 +76,8 @@ export class SignUpComponent implements OnInit {
         .getByIndex('users', 'email', this.signUpForm.value.email.toLowerCase())
         .subscribe((user) => {
           if (typeof user === 'undefined') {
-            this.dbService
-              .add('users', {
-                firstName: this.signUpForm.value.firstName,
-                lastName: this.signUpForm.value.lastName,
-                email: this.signUpForm.value.email.toLowerCase(),
-                password: this.signUpForm.value.password,
-              })
-              .subscribe(() => {
-                this.successfulSignUp = true;
-              });
+            this.userService.register(this.dbService, this.signUpForm);
+            this.successfulSignUp = true;
           } else {
             this.failedSignUp = true;
           }
