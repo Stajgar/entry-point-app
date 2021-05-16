@@ -15,4 +15,17 @@ export class UserService {
       password: signUpForm.value.password,
     });
   }
+
+  logInSuccessful(user, logInForm) {
+    if (
+      typeof user === 'undefined' ||
+      logInForm.value.password !== user.password
+    ) {
+      return false;
+    } else {
+      window.sessionStorage.setItem('userId', user.id.toString());
+      window.sessionStorage.setItem('userFirstName', user.firstName);
+      return true;
+    }
+  }
 }

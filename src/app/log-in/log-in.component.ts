@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
+import { UserService } from '../core/services';
 
 @Component({
   selector: 'app-log-in',
@@ -9,7 +10,11 @@ import { NgxIndexedDBService } from 'ngx-indexed-db';
   styleUrls: ['./log-in.component.css'],
 })
 export class LogInComponent implements OnInit {
-  constructor(private dbService: NgxIndexedDBService, private router: Router) {}
+  constructor(
+    private dbService: NgxIndexedDBService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   logInForm: FormGroup;
   failedLogIn: boolean;
@@ -46,16 +51,10 @@ export class LogInComponent implements OnInit {
             password: string;
             firstName: string;
           }) => {
-            if (
-              typeof user === 'undefined' ||
-              this.logInForm.value.password !== user.password
-            ) {
-              this.failedLogIn = true;
-            } else {
-              window.sessionStorage.setItem('userId', user.id.toString());
-              window.sessionStorage.setItem('userFirstName', user.firstName);
-
+            if (this.userService.logInSuccessful(user, this.logInForm)) {
               this.router.navigate(['/welcome']);
+            } else {
+              this.failedLogIn = true;
             }
           }
         );
